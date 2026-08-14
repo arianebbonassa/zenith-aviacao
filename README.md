@@ -2,7 +2,7 @@
 
 Landing page de alta performance para a **Zenith Aviação**, construída para transmitir exclusividade, precisão e a sensação de voo executivo desde o primeiro segundo de rolagem. O projeto foi desenvolvido com foco total em **imersão visual**: um vídeo de fundo em tela cheia serve como fio condutor da narrativa, enquanto animações sincronizadas ao scroll guiam o usuário por cada seção como se estivesse conduzindo a própria aeronave pela página.
 
-Mais do que uma página estática, este é um exercício de **storytelling visual**: cada movimento de scroll foi calibrado para reforçar a sofisticação da marca e entregar uma experiência de usuário fluida, cinematográfica e sem atritos — em qualquer dispositivo.
+Mais do que uma página estática, este é um exercício de **storytelling visual**: cada movimento de scroll foi calibrado para reforçar a sofisticação da marca e entregar uma experiência de usuário fluida, cinematográfica e sem atritos em qualquer dispositivo.
 
 🔗 **Acesse o projeto ao vivo:** [zenith-aviacao.netlify.app](https://zenith-aviacao.netlify.app/)
 
@@ -10,7 +10,7 @@ Mais do que uma página estática, este é um exercício de **storytelling visua
 
 ## 🎯 Sobre o Projeto
 
-O objetivo central foi criar uma experiência **cinematográfica**, onde o vídeo em tela cheia não é apenas um elemento decorativo, mas o protagonista da navegação. As animações de scroll (via **GSAP** e **ScrollTrigger**) foram usadas para criar transições suaves entre seções, revelar conteúdo de forma progressiva e reforçar a sensação de profundidade e movimento — elementos essenciais para transmitir a experiência premium de um voo executivo.
+O objetivo central foi criar uma experiência **cinematográfica**, onde o vídeo em tela cheia não é apenas um elemento decorativo, mas o protagonista da navegação. As animações de scroll (via **GSAP** e **ScrollTrigger**) foram usadas para criar transições suaves entre seções, revelar conteúdo de forma progressiva e reforçar a sensação de profundidade e movimento elementos essenciais para transmitir a experiência premium de um voo executivo.
 
 Todo o desenvolvimento seguiu um cuidado rigoroso com:
 
@@ -25,7 +25,7 @@ Todo o desenvolvimento seguiu um cuidado rigoroso com:
 - **HTML5** estrutura semântica e acessível
 - **CSS3** estilização, responsividade e efeitos visuais
 - **JavaScript** lógica de interação
-  - **GSAP (GreenSock Animation Platform)** — motor de animações de alta performance
+  - **GSAP (GreenSock Animation Platform)**  motor de animações de alta performance
   - **ScrollTrigger** sincronização de animações com o scroll do usuário
 
 ---
