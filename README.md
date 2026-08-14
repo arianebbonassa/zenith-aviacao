@@ -22,11 +22,11 @@ Todo o desenvolvimento seguiu um cuidado rigoroso com:
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **HTML5** — estrutura semântica e acessível
-- **CSS3** — estilização, responsividade e efeitos visuais
-- **JavaScript** — lógica de interação
+- **HTML5** estrutura semântica e acessível
+- **CSS3** estilização, responsividade e efeitos visuais
+- **JavaScript** lógica de interação
   - **GSAP (GreenSock Animation Platform)** — motor de animações de alta performance
-  - **ScrollTrigger** — sincronização de animações com o scroll do usuário
+  - **ScrollTrigger** sincronização de animações com o scroll do usuário
 
 ---
 
