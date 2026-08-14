@@ -1,0 +1,820 @@
+/* ============================================================================
+   ZENITH — Aviação Executiva
+   CSS nativo (sem frameworks). Paleta de marca definida em custom properties.
+   ============================================================================ */
+
+:root {
+  /* Azul meia-noite profundo */
+  --midnight-950: #04060c;
+  --midnight-900: #080b15;
+  --midnight-800: #0d1220;
+  --midnight-700: #161d30;
+  --midnight-600: #212b44;
+
+  /* Prata titânio */
+  --titanium-100: #f1f2f5;
+  --titanium-200: #dadfe6;
+  --titanium-300: #b9c0cc;
+  --titanium-400: #98a1b0;
+  --titanium-500: #7b8494;
+
+  /* Dourado champagne */
+  --champagne-200: #f0e4c8;
+  --champagne-300: #e3cea0;
+  --champagne-400: #d4b983;
+  --champagne-500: #c9a876;
+  --champagne-600: #b08f5c;
+  --champagne-700: #8f7148;
+
+  --white: #ffffff;
+
+  --font-serif: "Cormorant Garamond", "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --header-h: 84px;
+}
+
+/* ---------- Reset ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--midnight-950);
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--midnight-950);
+  color: var(--titanium-100);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+}
+
+/* ---------- Film grain overlay ---------- */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* ============================================================================
+   CABEÇALHO / MARCA (fixo, sempre visível sobre o vídeo)
+   ============================================================================ */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.4rem clamp(1.5rem, 4vw, 3rem);
+  background: linear-gradient(to bottom, rgba(4, 6, 12, 0.85) 0%, rgba(4, 6, 12, 0.15) 75%, transparent 100%);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.brand-mark {
+  display: block;
+  flex-shrink: 0;
+}
+
+.brand-name {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.brand-name__title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.brand-name__subtitle {
+  font-size: 0.58rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--champagne-400);
+  margin-top: 0.35rem;
+}
+
+.site-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--titanium-200);
+}
+
+.site-header__nav a {
+  transition: color 0.3s ease;
+}
+
+.site-header__nav a:hover {
+  color: var(--champagne-400);
+}
+
+.site-header__cta {
+  border: 1px solid rgba(201, 168, 118, 0.5);
+  color: var(--champagne-300);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.4rem;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.site-header__cta:hover {
+  background: var(--champagne-500);
+  color: var(--midnight-900);
+  border-color: var(--champagne-500);
+}
+
+/* ---------- Scroll track / pin stage ---------- */
+/*
+  VELOCIDADE DO SCROLL / DURAÇÃO DA SEQUÊNCIA
+  Esta altura é o "scroll track": a distância total que o usuário precisa
+  rolar para o vídeo ir do frame 0 até o último frame, com as três seções
+  de texto (Jornada + Interior + Destinos) entrando e saindo pelo caminho.
+  Aumentar = experiência mais lenta e cinematográfica (mais scroll por frame).
+  Diminuir = experiência mais rápida/direta.
+  Os pontos de corte de cada seção de texto ficam em js/main.js, no
+  objeto TIMING — se mudar este valor, normalmente não precisa tocar lá,
+  pois os cortes são em porcentagem (0 a 1) do total.
+
+  Quando o scroll chega ao fim do track, o vídeo está no último frame, o
+  .pin-stage despina (ver pinSpacing:false em js/main.js) e o fluxo normal
+  da página assume — Seção 4 (CTA) e o rodapé, logo abaixo no HTML.
+*/
+.scroll-track {
+  position: relative;
+  height: 1000vh;
+  width: 100%;
+}
+
+.pin-stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--midnight-950);
+}
+
+.jet-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  will-change: auto;
+}
+
+.pin-stage.is-static .jet-video {
+  display: none;
+}
+
+.pin-stage.is-static {
+  background-image: linear-gradient(rgba(4, 6, 12, 0.45), rgba(4, 6, 12, 0.82)), url("../assets/poster.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Camadas de profundidade: garantem contraste absoluto do texto sobre o vídeo */
+.scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.15) 30%,
+    rgba(0, 0, 0, 0.15) 60%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+
+.scrim--vignette {
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+/* ---------- Hero copy ---------- */
+.hero-copy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 1.5rem;
+  z-index: 2;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--champagne-300);
+  margin-bottom: 1.5rem;
+}
+
+.hero-copy h1 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 7vw, 6.2rem);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  text-shadow: 0 6px 28px rgba(0, 0, 0, 0.65);
+}
+
+.hero-copy h1 em {
+  font-style: italic;
+  color: var(--champagne-200);
+}
+
+.hero-copy .subtitle {
+  margin-top: 1.6rem;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(0.98rem, 1.4vw, 1.2rem);
+  letter-spacing: 0.06em;
+  color: var(--titanium-100);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- Scroll indicator ---------- */
+.scroll-indicator {
+  position: absolute;
+  left: 50%;
+  bottom: 3rem;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  z-index: 2;
+  transition: opacity 0.6s ease;
+  opacity: 1;
+}
+
+.scroll-indicator span {
+  font-size: 0.68rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--titanium-200);
+}
+
+.scroll-indicator .chevron {
+  font-size: 1rem;
+  color: var(--champagne-300);
+  animation: bob 2.2s ease-in-out infinite;
+}
+
+.scroll-indicator.hidden {
+  opacity: 0;
+}
+
+.scroll-indicator.visible {
+  opacity: 1;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* ---------- Texto das seções (dentro do pin do vídeo) ---------- */
+.section-copy {
+  position: absolute;
+  left: 50%;
+  bottom: 14%;
+  transform: translateX(-50%);
+  width: min(680px, 88vw);
+  text-align: center;
+  z-index: 2;
+  opacity: 0;
+}
+
+/* Painel de vidro escuro estruturado atrás do texto — garante que a
+   tipografia nunca se misture ao vídeo, em qualquer trecho da sequência.
+   O padding usa vw + vh combinados para encolher em telas baixas (laptops,
+   celular em paisagem), não só em telas estreitas. */
+.glass-panel {
+  background: rgba(4, 6, 12, 0.5);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: clamp(1.25rem, 2vw + 2vh, 2.6rem) clamp(1.5rem, 4vw, 2.6rem);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+
+.glass-panel--center {
+  margin: 0 auto;
+  max-width: 640px;
+}
+
+.section-copy h2 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.6rem, 1.6vw + 1.6vh, 2.9rem);
+  line-height: 1.15;
+  margin-bottom: 0.85rem;
+  color: var(--white);
+}
+
+.accent-italic {
+  color: var(--champagne-300);
+  font-style: italic;
+}
+
+.section-copy p {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(0.88rem, 0.6vw + 0.6vh, 1.1rem);
+  line-height: 1.65;
+  color: rgba(241, 242, 245, 0.92);
+}
+
+.glass-panel p {
+  max-width: 52ch;
+  margin: 0 auto;
+}
+
+.section-copy.visible {
+  opacity: 1;
+}
+
+/* ---------- Seções 2 e 3 — variante centralizada e larga ---------- */
+/* Usada pelo "Interior" (Seção 2) e pelo "Destino" (Seção 3): título +
+   parágrafo (glass-panel) e a grade de cards flutuantes abaixo.
+
+   Em vez de centralizar via top:%/transform (que corta o conteúdo embaixo
+   quando a soma das alturas ultrapassa os 100vh do .pin-stage), o bloco
+   agora preenche a altura inteira do pin-stage e centraliza com flexbox —
+   assim título, subtítulo e cards sempre respiram entre si e nunca ficam
+   cortados nas bordas, inclusive em telas baixas (notebooks, celular
+   deitado). O padding-top reserva o espaço do cabeçalho fixo. */
+.section-copy--wide {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transform: none;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.1rem, 1.5vw + 1.5vh, 2rem);
+  padding: clamp(6rem, 14vh, 8rem) clamp(1.25rem, 4vw, 2rem) clamp(1.5rem, 5vh, 2.5rem);
+}
+
+/* O espaçamento entre o glass-panel e os cards já vem do `gap` do flex pai
+   (.section-copy--wide) — sem margin-top aqui para não somar respiro em
+   dobro e empurrar os cards para fora da tela em telas mais baixas. */
+.floating-card-grid {
+  width: 100%;
+  max-width: min(980px, 94vw);
+  display: flex;
+  justify-content: center;
+  gap: clamp(0.85rem, 1.5vw, 1.25rem);
+  flex-wrap: wrap;
+}
+
+/* Seção 3 pede explicitamente um "layout em grid limpo". */
+.floating-card-grid--grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.floating-card {
+  flex: 1 1 220px;
+  max-width: 280px;
+  min-width: 0;
+  padding: clamp(1.1rem, 1.4vw + 1.4vh, 1.6rem) clamp(1.1rem, 2vw, 1.5rem);
+  text-align: left;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(4, 6, 12, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  overflow-wrap: break-word;
+  /* Estado inicial visual (fallback sem JS); o scrub controla opacity/transform via JS. */
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.floating-card-grid--grid .floating-card {
+  max-width: none;
+}
+
+.floating-card__icon {
+  width: 22px;
+  height: 22px;
+  color: var(--champagne-400);
+  margin-bottom: 0.7rem;
+}
+
+.floating-card__label {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(1.02rem, 0.4vw + 0.9vh, 1.15rem);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+
+.floating-card__desc {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(0.78rem, 0.3vw + 0.5vh, 0.85rem);
+  line-height: 1.55;
+  color: var(--titanium-200);
+}
+
+/* Fallback mobile/estático: cards revelam junto com o resto da seção. */
+.pin-stage.is-static .floating-card {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* ---------- Reveal-on-scroll genérico (fora do pin do vídeo) ---------- */
+/* Estado inicial de qualquer elemento .reveal-up; js/main.js anima
+   opacity/y via GSAP + ScrollTrigger quando o elemento entra na tela.
+   Ver initScrollReveals() em js/main.js. */
+.reveal-up {
+  opacity: 0;
+}
+
+/* ============================================================================
+   SEÇÃO 4 — CTA final / Contato
+   ============================================================================ */
+.cta-section {
+  position: relative;
+  background: var(--midnight-900);
+  padding: clamp(6rem, 12vw, 10rem) 1.5rem 6rem;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top, rgba(201, 168, 118, 0.09), transparent 60%);
+  pointer-events: none;
+}
+
+.cta-inner {
+  position: relative;
+  width: min(620px, 100%);
+  text-align: center;
+}
+
+.cta-section .eyebrow {
+  margin-bottom: 1rem;
+}
+
+.cta-section h2 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  margin-bottom: 1.1rem;
+  color: var(--white);
+}
+
+.cta-lead {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+  line-height: 1.75;
+  color: var(--titanium-200);
+  margin-bottom: 3rem;
+}
+
+/* ---------- Formulário (glassmorphism escuro de alto contraste) ---------- */
+.contact-form {
+  text-align: left;
+  padding: clamp(1.8rem, 4vw, 2.6rem);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.contact-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+}
+
+.field {
+  position: relative;
+}
+
+.field input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  padding: 1.35rem 1rem 0.55rem;
+  outline: none;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.field input:focus {
+  border-color: var(--champagne-400);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.field label {
+  position: absolute;
+  left: 1rem;
+  top: 1.05rem;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  color: var(--titanium-400);
+  pointer-events: none;
+  transition: transform 0.2s ease, font-size 0.2s ease, color 0.2s ease, top 0.2s ease;
+}
+
+/* Label "flutua" para cima quando o campo está focado ou preenchido.
+   Depende de placeholder=" " nos inputs para o :placeholder-shown funcionar. */
+.field input:focus + label,
+.field input:not(:placeholder-shown) + label {
+  top: 0.55rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--champagne-300);
+}
+
+.cta-button {
+  width: 100%;
+  margin-top: 0.4rem;
+  padding: 1.1rem 2.2rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--champagne-500);
+  color: var(--midnight-900);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(201, 168, 118, 0.2);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-button:hover,
+.cta-button:focus-visible {
+  background: var(--champagne-400);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(201, 168, 118, 0.3);
+}
+
+.form-feedback {
+  min-height: 1.2em;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  color: var(--champagne-300);
+}
+
+.concierge-link {
+  display: inline-block;
+  margin-top: 2rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--titanium-300);
+  border-bottom: 1px solid transparent;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.concierge-link:hover {
+  color: var(--champagne-300);
+  border-color: var(--champagne-400);
+}
+
+/* ============================================================================
+   RODAPÉ PROFISSIONAL
+   ============================================================================ */
+.site-footer {
+  position: relative;
+  background: var(--midnight-950);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: clamp(3.5rem, 6vw, 5rem) clamp(1.5rem, 4vw, 3rem) 2.5rem;
+}
+
+.site-footer__grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 2.5rem;
+}
+
+.site-footer__about .brand {
+  margin-bottom: 1.1rem;
+}
+
+.brand--footer .brand-name__title {
+  font-size: 1.1rem;
+}
+
+.site-footer__desc {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--titanium-400);
+  max-width: 320px;
+}
+
+.site-footer__col h4 {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 1.1rem;
+}
+
+.site-footer__col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1.2rem;
+}
+
+.site-footer__col a {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: var(--titanium-300);
+  transition: color 0.3s ease;
+}
+
+.site-footer__col a:hover {
+  color: var(--champagne-300);
+}
+
+.site-footer__social {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.site-footer__social a {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--titanium-400);
+  transition: color 0.3s ease;
+}
+
+.site-footer__social a:hover {
+  color: var(--champagne-300);
+}
+
+.site-footer__legal-block {
+  max-width: 1180px;
+  margin: 3rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-footer__legal-text {
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  line-height: 1.7;
+  color: var(--titanium-500);
+  max-width: 900px;
+  margin-bottom: 0.9rem;
+}
+
+.site-footer__legal {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  color: var(--titanium-500);
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-indicator .chevron {
+    animation: none;
+  }
+  .hero-copy,
+  .section-copy,
+  .scroll-indicator {
+    transition: none;
+  }
+}
+
+/* ---------- Tablets ---------- */
+@media (max-width: 1024px) {
+  .site-footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .floating-card-grid--grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Small screens (fallback layout adjustments) ---------- */
+@media (max-width: 768px) {
+  .site-header__nav {
+    display: none;
+  }
+
+  .site-header__cta {
+    display: none;
+  }
+
+  .pin-stage {
+    height: 100svh;
+  }
+
+  .section-copy {
+    bottom: 8%;
+  }
+
+  .floating-card-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .floating-card-grid--grid {
+    display: flex;
+    grid-template-columns: none;
+  }
+
+  .floating-card {
+    max-width: 360px;
+    width: 100%;
+  }
+
+  .contact-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
