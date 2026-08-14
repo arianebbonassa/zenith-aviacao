@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>| ZENITH | Além do Horizonte</title>
+<meta name="description" content="ZENITH Aviação Executiva — uma jornada cinematográfica guiada pelo scroll. Onde o tempo pertence a você.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ===================== HEADER / MARCA ===================== -->
+<header class="site-header">
+  <a href="#" class="brand" aria-label="ZENITH Aviação Executiva — início">
+    <svg class="brand-mark" width="34" height="34" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <line x1="4" y1="33" x2="44" y2="33" stroke="#7B8494" stroke-width="1" opacity="0.45"/>
+      <path d="M4 31 L24 9 L44 31" stroke="url(#zenithGold)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="24" cy="9" r="2.2" fill="#E3CEA0"/>
+      <defs>
+        <linearGradient id="zenithGold" x1="0" y1="0" x2="48" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#E3CEA0"/>
+          <stop offset="1" stop-color="#8F7148"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <span class="brand-name">
+      <span class="brand-name__title">Zenith</span>
+      <span class="brand-name__subtitle">Aviação Executiva</span>
+    </span>
+  </a>
+
+  <nav class="site-header__nav" aria-label="Navegação principal">
+    <a href="#experiencia">Experiência</a>
+    <a href="#destinos">Destinos</a>
+    <a href="#ctaSection">Contato</a>
+  </nav>
+
+  <a href="#ctaSection" class="site-header__cta">Solicitar Cotação</a>
+</header>
+
+<main>
+
+  <!--
+    SCROLL TRACK
+    A altura deste container (definida em css/style.css, seletor .scroll-track)
+    determina a "duração" inteira da sequência cinematográfica.
+  -->
+  <section class="scroll-track" id="scrollTrack">
+    <div class="pin-stage" id="pinStage">
+
+     <video
+        id="jetVideo"
+        class="jet-video"
+        src="./assets/jet-v7-web.mp4"
+        poster="assets/poster.jpg"
+        muted
+        playsinline
+        preload="auto"
+></video>
+
+      <!-- Camadas de profundidade: garantem contraste absoluto do texto sobre o vídeo -->
+      <div class="scrim" aria-hidden="true"></div>
+      <div class="scrim scrim--vignette" aria-hidden="true"></div>
+
+      <!-- ===================== HERO ===================== -->
+      <header class="hero-copy" id="heroCopy">
+        <p class="eyebrow">Uma Jornada Cinematográfica</p>
+        <h1>Além do <em>Horizonte</em></h1>
+        <p class="subtitle">Onde o tempo pertence a você. A excelência em aviação executiva.</p>
+      </header>
+
+      <div class="scroll-indicator" id="scrollIndicator">
+        <span>Role para explorar</span>
+        <div class="chevron">↓</div>
+      </div>
+
+      <!-- ===================== SEÇÃO 1 — A JORNADA ===================== -->
+      <section class="section-copy" id="section1Copy">
+        <div class="glass-panel">
+          <h2>Mais do que um voo, <span class="accent-italic">uma nova perspectiva.</span></h2>
+          <p>
+            Liberdade para definir sua rota, privacidade absoluta e um padrão de excelência
+            desenhado para otimizar o seu tempo.
+          </p>
+        </div>
+      </section>
+
+      <!-- ===================== SEÇÃO 2 — INTERIOR & EXPERIÊNCIA A BORDO ===================== -->
+      <section class="section-copy section-copy--wide" id="section2Copy">
+        <div class="glass-panel glass-panel--center">
+          <h2>O ápice do conforto <span class="accent-italic">acima das nuvens.</span></h2>
+          <p>
+            Cabines configuradas sob medida para reuniões de negócios ou momentos de descanso,
+            combinando isolamento acústico superior e conectividade global.
+          </p>
+        </div>
+
+        <div class="floating-card-grid" id="featureCards">
+          <div class="floating-card" data-card-index="0">
+            <svg class="floating-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <path d="M7 4v9a2 2 0 0 0 2 2h6M7 13H5.5A1.5 1.5 0 0 0 4 14.5V16M15 4v9M9 20h8l-1-4H10l-1 4Z"/>
+            </svg>
+            <span class="floating-card__label">Assinatura Ergonômica</span>
+            <p class="floating-card__desc">Poltronas reclináveis em couro legítimo com rotação 360°.</p>
+          </div>
+          <div class="floating-card" data-card-index="1">
+            <svg class="floating-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <path d="M4 9c4.5-4 11.5-4 16 0M7 12.5c2.8-2.4 7.2-2.4 10 0M10 16c1.2-1 2.8-1 4 0"/>
+              <circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+            <span class="floating-card__label">Conectividade Satelital</span>
+            <p class="floating-card__desc">Wi-Fi de alta velocidade em qualquer rota global.</p>
+          </div>
+          <div class="floating-card" data-card-index="2">
+            <svg class="floating-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <path d="M6 3v7a2 2 0 0 0 2 2v9M6 3v7M9 3v7M6 6H4M18 3c-1.7 0-3 1.8-3 4s1.3 4 3 4v10"/>
+            </svg>
+            <span class="floating-card__label">Gastronomia de Altitude</span>
+            <p class="floating-card__desc">Menus exclusivos assinados por chefs renomados.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SEÇÃO 3 — DESTINOS & FRETAMENTO GLOBAL ===================== -->
+      <section class="section-copy section-copy--wide" id="section3Copy">
+        <div class="glass-panel glass-panel--center">
+          <h2>O mundo ao seu alcance, <span class="accent-italic">sem escalas desnecessárias.</span></h2>
+          <p>
+            Acesso direto a aeroportos executivos e privados em todo o mundo, reduzindo o tempo
+            de traslado e garantindo total discrição.
+          </p>
+        </div>
+
+        <div class="floating-card-grid floating-card-grid--grid" id="destinationCards">
+          <div class="floating-card" data-card-index="0">
+            <svg class="floating-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M15 9l-2 5-5 2 2-5 5-2Z"/>
+            </svg>
+            <span class="floating-card__label">Fretamento Sob Medida</span>
+            <p class="floating-card__desc">Rotas desenhadas conforme sua agenda, sem escalas.</p>
+          </div>
+          <div class="floating-card" data-card-index="1">
+            <svg class="floating-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <path d="M2 14l8-2 4-8 2 1-2 7 6 1v2l-6 1 2 6-2 1-4-7-8-1v-2Z"/>
+            </svg>
+            <span class="floating-card__label">Gestão de Aeronaves</span>
+            <p class="floating-card__desc">Operação, manutenção e tripulação sob um único padrão de excelência.</p>
+          </div>
+          <div class="floating-card" data-card-index="2">
+            <svg class="floating-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7v5l3.5 2"/>
+            </svg>
+            <span class="floating-card__label">Concierge 24/7</span>
+            <p class="floating-card__desc">Uma equipe dedicada a antecipar cada detalhe da sua viagem.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+  <!--
+    A PARTIR DAQUI o conteúdo já não faz parte do pin do vídeo — é fluxo
+    normal de página, entrando exatamente quando o scroll-track termina.
+  -->
+
+  <!-- ===================== SEÇÃO 4 — CTA & CONTATO ===================== -->
+  <section class="cta-section" id="ctaSection">
+    <div class="cta-inner">
+      <p class="eyebrow reveal-up">Comece sua jornada</p>
+      <h2 class="reveal-up">Pronto para decolar?</h2>
+      <p class="cta-lead reveal-up">
+        Reserve seu próximo voo particular ou entre em contato com nossa equipe de concierge
+        para uma experiência sob medida.
+      </p>
+
+      <form class="contact-form reveal-up" id="contactForm" novalidate>
+        <div class="contact-form__row">
+          <div class="field">
+            <input type="text" id="ctaName" name="name" placeholder=" " required>
+            <label for="ctaName">Nome completo</label>
+          </div>
+          <div class="field">
+            <input type="email" id="ctaEmail" name="email" placeholder=" " required>
+            <label for="ctaEmail">E-mail</label>
+          </div>
+        </div>
+
+        <div class="contact-form__row">
+          <div class="field">
+            <input type="tel" id="ctaPhone" name="phone" placeholder=" ">
+            <label for="ctaPhone">Telefone</label>
+          </div>
+          <div class="field">
+            <input type="text" id="ctaRoute" name="route" placeholder=" " required>
+            <label for="ctaRoute">Rota desejada</label>
+          </div>
+        </div>
+
+        <button type="submit" class="cta-button">
+          <span>Solicitar Cotação</span>
+        </button>
+
+        <p class="form-feedback" id="formFeedback" role="status" aria-live="polite"></p>
+      </form>
+
+      <!-- Placeholder: trocar por um canal de contato real do concierge. -->
+      <a href="#contactForm" class="concierge-link reveal-up">
+        ou fale diretamente com nosso concierge →
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================== RODAPÉ ===================== -->
+  <footer class="site-footer">
+    <div class="site-footer__grid">
+
+      <div class="site-footer__about">
+        <a href="#" class="brand brand--footer" aria-label="ZENITH Aviação Executiva">
+          <svg class="brand-mark" width="28" height="28" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <line x1="4" y1="33" x2="44" y2="33" stroke="#7B8494" stroke-width="1" opacity="0.45"/>
+            <path d="M4 31 L24 9 L44 31" stroke="url(#zenithGoldFooter)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="24" cy="9" r="2.2" fill="#E3CEA0"/>
+            <defs>
+              <linearGradient id="zenithGoldFooter" x1="0" y1="0" x2="48" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#E3CEA0"/>
+                <stop offset="1" stop-color="#8F7148"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="brand-name__title">Zenith</span>
+        </a>
+        <p class="site-footer__desc">
+          Aviação executiva sob medida precisão, discrição e um novo padrão de excelência
+          acima das nuvens.
+        </p>
+      </div>
+
+      <nav class="site-footer__col" aria-label="Empresa">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#">Sobre a Zenith</a></li>
+          <li><a href="#">Nossa Frota</a></li>
+          <li><a href="#destinos">Destinos</a></li>
+        </ul>
+      </nav>
+
+      <nav class="site-footer__col" aria-label="Serviços">
+        <h4>Serviços</h4>
+        <ul>
+          <li><a href="#">Fretamento Executivo</a></li>
+          <li><a href="#">Gestão de Aeronaves</a></li>
+          <li><a href="#ctaSection">Concierge 24/7</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-footer__col">
+        <h4>Contato</h4>
+        <ul>
+          <li><a href="mailto:concierge@zenithaviacao.com.br">concierge@zenithaviacao.com.br</a></li>
+          <li><a href="tel:+551140028922">+55 11 4002-8922</a></li>
+        </ul>
+        <div class="site-footer__social" aria-label="Redes sociais">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="LinkedIn">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-footer__legal-block">
+      <p class="site-footer__legal-text">
+        A ZENITH Aviação Executiva atua como intermediária na contratação de voos, operando exclusivamente
+        em parceria com empresas de táxi aéreo e transportadoras certificadas pela Agência Nacional de
+        Aviação Civil (ANAC), em conformidade com o Regulamento Brasileiro da Aviação Civil (RBAC). Todas as
+        aeronaves fretadas são operadas por tripulações habilitadas, sob os respectivos certificados de
+        operador aéreo (COA).
+      </p>
+      <p class="site-footer__legal">© 2026 Zenith Aviação Executiva. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
